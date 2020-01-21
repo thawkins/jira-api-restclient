@@ -27,14 +27,6 @@ namespace thawkins\Jira;
 
 class User
 {
-
-    /**
-     * Expand.
-     *
-     * @var array
-     */
-    protected $expand;
-
     /**
      * ID.
      *
@@ -43,18 +35,11 @@ class User
     protected $id;
 
     /**
-     * Self.
+     * ID.
      *
      * @var string
      */
-    protected $self;
-
-    /**
-     * Key.
-     *
-     * @var string
-     */
-    protected $key;
+    protected $displayName;
 
     /**
      * Fields.
@@ -77,32 +62,9 @@ class User
      */
     public function __construct(array $user = array())
     {
-        if ( isset($user['expand']) ) {
-            $this->expand = explode(',', $user['expand']);
-            unset($user['expand']);
-        }
-
-        if ( isset($user['id']) ) {
-            $this->id = $user['id'];
-            unset($user['id']);
-        }
-
-        if ( isset($user['self']) ) {
-            $this->self = $user['self'];
-            unset($user['self']);
-        }
-
-        if ( isset($user['key']) ) {
-            $this->key = $user['key'];
-            unset($user['key']);
-        }
-
-        if ( isset($user['fields']) ) {
-            $this->fields = $user['fields'];
-            unset($user['fields']);
-        }
-
-        $this->expandedInformation = $user;
+       foreach($user as $key=>$value){
+           $this->$key = $value;
+       }
     }
 
     /**

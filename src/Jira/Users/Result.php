@@ -71,10 +71,22 @@ class Result
 	 * @param array $result Result.
 	 */
 	public function __construct(array $result)
-	{
-		$this->total = count($result);
-		$this->result = $result;
-	}
+    {
+        $this->total = count($result);
+        $this->result = array();
+        if ($result) {
+            $_result = array();
+            $this->total=0;
+            foreach ($result as $user) {
+                if ($user['active'] === true) {
+                    if ($user['accountType'] == 'atlassian') {
+                        $_result[] = new User($user);
+                        $this->total++;                }
+                }
+            }
+            $this->result = $_result;
+        }
+    }
 
 	/**
 	 * Returns total number of records.
@@ -93,7 +105,7 @@ class Result
 	 */
 	public function getCount()
 	{
-		return count($this->getUsers());
+		return $this->total;
 	}
 
 	/**
@@ -103,19 +115,7 @@ class Result
 	 */
 	public function getUsers()
 	{
-		if ( isset($this->result) ) {
-			$result = array();
-
-			foreach ( $this->result as $user ) {
-			    if($user['active'] === true) {
-			        $result[] = new User($user);
-			    }
-			}
-
-			return $result;
-		}
-
-		return array();
+		return $this->result;;
 	}
 
 	/**
