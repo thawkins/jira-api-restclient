@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace thawkins\Jira\Api\Users;
+namespace thawkins\Jira\Users;
 
 
 use thawkins\Jira\User;
@@ -106,7 +106,7 @@ class Result
 	 *
 	 * @return integer
 	 */
-	public function UsersgetCount()
+	public function getCount()
 	{
 		return count($this->getUsers());
 	}

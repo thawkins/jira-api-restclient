@@ -28,7 +28,8 @@ namespace thawkins\Jira;
 use thawkins\Jira\Api\Authentication\AuthenticationInterface;
 use thawkins\Jira\Api\Client\ClientInterface;
 use thawkins\Jira\Api\Client\CurlClient;
-use thawkins\Jira\Api\Issues\Result;
+use thawkins\Jira\Issues\Result;
+use thawkins\Jira\Users;
 
 class Api
 {
@@ -199,7 +200,7 @@ class Api
 	 * @param string $issue_key Issue key should be "YOURPROJ-221".
 	 * @param string $expand    Expand.
 	 *
-	 * @return Result|false
+	 * @return Issues/Result|false
 	 */
 	public function getIssue($issue_key, $expand = '')
 	{
@@ -212,7 +213,7 @@ class Api
 	 * @param string $issue_key Issue key.
 	 * @param array  $params    Params.
 	 *
-	 * @return Result|false
+	 * @return Issues/Result|false
 	 */
 	public function editIssue($issue_key, array $params)
 	{
@@ -723,18 +724,20 @@ class Api
 		return $this->api(self::REQUEST_POST, sprintf('/rest/api/2/issue/%s/remotelink', $issue_key), $options, true);
 	}
 
-	/**
-	 * Send request to specified host.
-	 *
-	 * @param string       $method          Request method.
-	 * @param string       $url             URL.
-	 * @param array|string $data            Data.
-	 * @param boolean      $return_as_array Return results as associative array.
-	 * @param boolean      $is_file         Is file-related request.
-	 * @param boolean      $debug           Debug this request.
-	 *
-	 * @return array|Result|false
-	 */
+    /**
+     * Send request to specified host.
+     *
+     * @param string $method Request method.
+     * @param string $url URL.
+     * @param array|string $data Data.
+     * @param boolean $return_as_array Return results as associative array.
+     * @param boolean $is_file Is file-related request.
+     * @param boolean $debug Debug this request.
+     *
+     * @return Result
+     * @throws Api\Exception
+     * @throws Api\UnauthorizedException
+     */
 	public function api(
 		$method = self::REQUEST_GET,
 		$url,
