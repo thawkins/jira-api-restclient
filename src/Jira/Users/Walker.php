@@ -26,8 +26,10 @@ namespace thawkins\Jira\Users;
 
 
 use Exception;
+use thawkins\Jira\Api\UnauthorizedException;
 use thawkins\Jira\Users\Api;
 use thawkins\Jira\User;
+
 
 class Walker implements \Iterator, \Countable
 {
@@ -197,7 +199,7 @@ class Walker implements \Iterator, \Countable
      * @return boolean The return value will be casted to boolean and then evaluated.
      *                 Returns true on success or false on failure.
      * @throws Exception When "Walker::push" method wasn't called.
-     * @throws Api\UnauthorizedException When it happens.
+     * @throws UnauthorizedException When it happens.
      * @link   http://php.net/manual/en/iterator.valid.php
      */
     public function valid()
@@ -219,7 +221,7 @@ class Walker implements \Iterator, \Countable
 
                 return true;
             }
-            catch ( Api\UnauthorizedException $e ) {
+            catch ( UnauthorizedException $e ) {
                 throw $e;
             }
             catch ( Exception $e ) {
@@ -236,7 +238,7 @@ class Walker implements \Iterator, \Countable
 
                     return true;
                 }
-                catch ( Api\UnauthorizedException $e ) {
+                catch ( UnauthorizedException $e ) {
                     throw $e;
                 }
                 catch ( Exception $e ) {
@@ -277,6 +279,7 @@ class Walker implements \Iterator, \Countable
      * Count elements of an object.
      *
      * @return integer The custom count as an integer.
+     * @throws Exception
      * @link   http://php.net/manual/en/countable.count.php
      */
     public function count()
@@ -317,7 +320,7 @@ class Walker implements \Iterator, \Countable
     {
         $this->total = $result->getTotal();
         $this->offset = 0;
-        $this->max = $result->getUsersCount();
+        $this->max = $result->getCount();
         $this->users = $result->getUsers();
         $this->startAt++;
     }
