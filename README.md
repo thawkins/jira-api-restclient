@@ -1,6 +1,6 @@
 # JIRA REST API Client
 
-[![Build Status](https://secure.travis-ci.org/chobie/jira-api-restclient.png)](http://travis-ci.org/chobie/jira-api-restclient)
+[![Build Status](https://secure.travis-ci.org/thawkins/jira-api-restclient.png)](http://travis-ci.org/thawkins/jira-api-restclient)
 
 You all know that JIRA supports REST API, right? It can be very useful, for example, during automation job creation and notification sending.
 
@@ -12,9 +12,9 @@ This library will ensure unforgettable expirience when working with JIRA through
 
 ```php
 <?php
-use chobie\Jira\Api;
-use chobie\Jira\Api\Authentication\Basic;
-use chobie\Jira\Issues\Walker;
+use thawkins\Jira\Api;
+use thawkins\Jira\Api\Authentication\Basic;
+use thawkins\Jira\Issues\Walker;
 
 $api = new Api(
     'https://your-jira-project.net',
@@ -35,7 +35,7 @@ foreach ( $walker as $issue ) {
 ## Installation
 
 ```
-php composer.phar require chobie/jira-api-restclient ^2.0@dev
+php composer.phar require thawkins/jira-api-restclient ^2.0@dev
 ```
 
 ## Requirements

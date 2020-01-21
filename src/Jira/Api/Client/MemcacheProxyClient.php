@@ -22,10 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace chobie\Jira\Api\Client;
+namespace thawkins\Jira\Api\Client;
 
 
-use chobie\Jira\Api\Authentication\AuthenticationInterface;
+use thawkins\Jira\Api\Authentication\AuthenticationInterface;
 
 class MemcacheProxyClient implements ClientInterface
 {

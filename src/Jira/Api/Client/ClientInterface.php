@@ -22,12 +22,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace chobie\Jira\Api\Client;
+namespace thawkins\Jira\Api\Client;
 
 
-use chobie\Jira\Api\Authentication\AuthenticationInterface;
-use chobie\Jira\Api\Exception;
-use chobie\Jira\Api\UnauthorizedException;
+use thawkins\Jira\Api\Authentication\AuthenticationInterface;
+use thawkins\Jira\Api\Exception;
+use thawkins\Jira\Api\UnauthorizedException;
 
 interface ClientInterface
 {

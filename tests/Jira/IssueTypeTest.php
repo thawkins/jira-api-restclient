@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\chobie\Jira;
+namespace Tests\thawkins\Jira;
 
 
-use chobie\Jira\IssueType;
+use thawkins\Jira\IssueType;
 use PHPUnit\Framework\TestCase;
 
 class IssueTypeTest extends TestCase

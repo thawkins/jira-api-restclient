@@ -20,9 +20,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Setup `.gitattributes` for better `CHANGELOG.md` merging by [@glensc].
 
 ### Changed
-- Classes/interfaces were renamed to use namespaces by [@chobie].
-- Using PSR-4 autoloader from Composer by [@chobie].
-- Minimal supported PHP version changed from 5.2 to 5.3 by [@chobie].
+- Classes/interfaces were renamed to use namespaces by [@thawkins].
+- Using PSR-4 autoloader from Composer by [@thawkins].
+- Minimal supported PHP version changed from 5.2 to 5.3 by [@thawkins].
 - The `Api::getPriorties` renamed into `Api::getPriorities` by [@josevh].
 - Remove trailing slash from endpoint url by [@Procta].
 - Added local cache to getResolutions by [@jpastoor].
@@ -50,14 +50,14 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 - Initial release.
 
-[Unreleased]: https://github.com/chobie/jira-api-restclient/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/chobie/jira-api-restclient/compare/b86f47129509bb27ae11d136fed67b70a27fd3be...v1.0.0
+[Unreleased]: https://github.com/thawkins/jira-api-restclient/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/thawkins/jira-api-restclient/compare/b86f47129509bb27ae11d136fed67b70a27fd3be...v1.0.0
 [@camspanos]: https://github.com/camspanos
 [@arnested]: https://github.com/arnested
 [@elmi82]: https://github.com/elmi82
 [@jpastoor]: https://github.com/jpastoor
 [@N-M]: https://github.com/N-M
-[@chobie]: https://github.com/chobie
+[@thawkins]: https://github.com/thawkins
 [@josevh]: https://github.com/josevh
 [@Procta]: https://github.com/Procta
 [@ubermuda]: https://github.com/ubermuda

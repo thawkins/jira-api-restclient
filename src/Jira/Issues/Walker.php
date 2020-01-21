@@ -22,10 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace chobie\Jira\Issues;
+namespace thawkins\Jira\Issues;
 
 
-use chobie\Jira\Api;
+use thawkins\Jira\Api;
 
 class Walker implements \Iterator, \Countable
 {

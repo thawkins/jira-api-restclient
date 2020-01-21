@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\chobie\Jira;
+namespace Tests\thawkins\Jira;
 
 
-use chobie\Jira\Api\Authentication\Basic;
+use thawkins\Jira\Api\Authentication\Basic;
 use PHPUnit\Framework\TestCase;
 
 class BasicTest extends TestCase

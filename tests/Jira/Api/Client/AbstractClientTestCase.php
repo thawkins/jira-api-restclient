@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\chobie\Jira\Api\Client;
+namespace Tests\thawkins\Jira\Api\Client;
 
 
-use chobie\Jira\Api;
-use chobie\Jira\Api\Authentication\Anonymous;
-use chobie\Jira\Api\Authentication\AuthenticationInterface;
-use chobie\Jira\Api\Authentication\Basic;
-use chobie\Jira\Api\Client\ClientInterface;
+use thawkins\Jira\Api;
+use thawkins\Jira\Api\Authentication\Anonymous;
+use thawkins\Jira\Api\Authentication\AuthenticationInterface;
+use thawkins\Jira\Api\Authentication\Basic;
+use thawkins\Jira\Api\Client\ClientInterface;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractClientTestCase extends TestCase
@@ -144,7 +144,7 @@ abstract class AbstractClientTestCase extends TestCase
 	public function testUnsupportedCredentialGiven()
 	{
 		$client_class_parts = explode('\\', get_class($this->client));
-		$credential = $this->prophesize('chobie\Jira\Api\Authentication\AuthenticationInterface')->reveal();
+		$credential = $this->prophesize('thawkins\Jira\Api\Authentication\AuthenticationInterface')->reveal();
 
 		if ( \method_exists($this, 'setExpectedException') ) {
 			$this->setExpectedException(
@@ -181,7 +181,7 @@ abstract class AbstractClientTestCase extends TestCase
 	}
 
 	/**
-	 * @expectedException \chobie\Jira\Api\UnauthorizedException
+	 * @expectedException \thawkins\Jira\Api\UnauthorizedException
 	 * @expectedExceptionMessage Unauthorized
 	 */
 	public function testUnauthorizedRequest()
@@ -190,7 +190,7 @@ abstract class AbstractClientTestCase extends TestCase
 	}
 
 	/**
-	 * @expectedException \chobie\Jira\Api\Exception
+	 * @expectedException \thawkins\Jira\Api\Exception
 	 * @expectedExceptionMessage JIRA Rest server returns unexpected result.
 	 */
 	public function testEmptyResponseWithUnknownHttpCode()

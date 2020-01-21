@@ -22,10 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace chobie\Jira\Api;
+namespace thawkins\Jira\Api;
 
 
-use chobie\Jira\Issue;
+use thawkins\Jira\Issue;
 
 class Result
 {

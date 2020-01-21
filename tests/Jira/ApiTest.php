@@ -1,18 +1,18 @@
 <?php
 
-namespace Tests\chobie\Jira;
+namespace Tests\thawkins\Jira;
 
 
-use chobie\Jira\Api;
-use chobie\Jira\Api\Authentication\AuthenticationInterface;
-use chobie\Jira\Api\Result;
+use thawkins\Jira\Api;
+use thawkins\Jira\Api\Authentication\AuthenticationInterface;
+use thawkins\Jira\Api\Result;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
  * Class ApiTest
  *
- * @package Tests\chobie\Jira
+ * @package Tests\thawkins\Jira
  */
 class ApiTest extends TestCase
 {
@@ -44,8 +44,8 @@ class ApiTest extends TestCase
 	{
 		parent::setUp();
 
-		$this->credential = $this->prophesize('chobie\Jira\Api\Authentication\AuthenticationInterface')->reveal();
-		$this->client = $this->prophesize('chobie\Jira\Api\Client\ClientInterface');
+		$this->credential = $this->prophesize('thawkins\Jira\Api\Authentication\AuthenticationInterface')->reveal();
+		$this->client = $this->prophesize('thawkins\Jira\Api\Client\ClientInterface');
 
 		$this->api = new Api(self::ENDPOINT, $this->credential, $this->client->reveal());
 	}

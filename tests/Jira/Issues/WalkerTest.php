@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\chobie\Jira\Issues;
+namespace Tests\thawkins\Jira\Issues;
 
 
-use chobie\Jira\Api\Result;
-use chobie\Jira\Api\UnauthorizedException;
-use chobie\Jira\Issue;
-use chobie\Jira\Issues\Walker;
+use thawkins\Jira\Api\Result;
+use thawkins\Jira\Api\UnauthorizedException;
+use thawkins\Jira\Issue;
+use thawkins\Jira\Issues\Walker;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -31,7 +31,7 @@ class WalkerTest extends TestCase
 	{
 		parent::setUp();
 
-		$this->api = $this->prophesize('chobie\Jira\Api');
+		$this->api = $this->prophesize('thawkins\Jira\Api');
 
 		if ( $this->captureErrorLog() ) {
 			$this->errorLogFile = tempnam(sys_get_temp_dir(), 'error_log_');
@@ -135,7 +135,7 @@ class WalkerTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \chobie\Jira\Api\UnauthorizedException
+	 * @expectedException \thawkins\Jira\Api\UnauthorizedException
 	 * @expectedExceptionMessage Unauthorized
 	 */
 	public function testUnauthorizedExceptionOnFirstPage()
@@ -165,7 +165,7 @@ class WalkerTest extends TestCase
 	}
 
 	/**
-	 * @expectedException \chobie\Jira\Api\UnauthorizedException
+	 * @expectedException \thawkins\Jira\Api\UnauthorizedException
 	 * @expectedExceptionMessage Unauthorized
 	 */
 	public function testUnauthorizedExceptionOnSecondPage()

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\chobie\Jira\Api\Client;
+namespace Tests\thawkins\Jira\Api\Client;
 
 
-use chobie\Jira\Api\Client\ClientInterface;
-use chobie\Jira\Api\Client\CurlClient;
+use thawkins\Jira\Api\Client\ClientInterface;
+use thawkins\Jira\Api\Client\CurlClient;
 
 class CurlClientTest extends AbstractClientTestCase
 {

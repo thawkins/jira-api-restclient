@@ -1,5 +1,5 @@
 {
-    "name": "chobie/jira-api-restclient",
+    "name": "thawkins/jira-api-restclient",
     "description": "JIRA REST API Client",
     "keywords": ["jira","rest","api"],
     "type": "library",
@@ -7,8 +7,13 @@
     "authors": [
         {
             "name": "Shuhei Tanuma",
-            "homepage": "http://chobie.github.io/",
-            "email": "chobieeee@php.net"
+            "homepage": "http://thawkins.github.io/",
+            "email": "thawkinseee@php.net"
+        },
+        {
+            "name": "Tim Hawkins",
+            "homepage": "http://tshawkins.blogspot.com/",
+            "email": "tim.thawkins@gmail.com"
         }
     ],
     "require": {
@@ -21,12 +26,12 @@
     },
     "autoload": {
         "psr-4" : {
-            "chobie\\" : "src"
+            "thawkins\\" : "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\chobie\\": "tests"
+            "Tests\\thawkins\\": "tests"
         }
     },
     "extra": {
