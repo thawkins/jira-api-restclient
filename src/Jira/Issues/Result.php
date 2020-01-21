@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace thawkins\Jira\Api;
+namespace thawkins\Jira\Api\Issues;
 
 
 use thawkins\Jira\Issue;
@@ -106,7 +106,7 @@ class Result
 	 *
 	 * @return integer
 	 */
-	public function getIssuesCount()
+	public function IssuesgetCount()
 	{
 		return count($this->getIssues());
 	}

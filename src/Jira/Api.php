@@ -28,7 +28,7 @@ namespace thawkins\Jira;
 use thawkins\Jira\Api\Authentication\AuthenticationInterface;
 use thawkins\Jira\Api\Client\ClientInterface;
 use thawkins\Jira\Api\Client\CurlClient;
-use thawkins\Jira\Api\Result;
+use thawkins\Jira\Api\Issues\Result;
 
 class Api
 {
