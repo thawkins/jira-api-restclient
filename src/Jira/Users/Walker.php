@@ -152,13 +152,13 @@ class Walker implements \Iterator, \Countable
     public function current()
     {
         if ( is_callable($this->callback) ) {
-            $tmp = $this->issues[$this->offset];
+            $tmp = $this->users[$this->offset];
             $callback = $this->callback;
 
             return $callback($tmp);
         }
         else {
-            return $this->issues[$this->offset];
+            return $this->users[$this->offset];
         }
     }
 
@@ -268,7 +268,7 @@ class Walker implements \Iterator, \Countable
         $this->max = 0;
         $this->total = null;
         $this->executed = false;
-        $this->issues = array();
+        $this->users = array();
     }
 
     /**
@@ -315,8 +315,8 @@ class Walker implements \Iterator, \Countable
     {
         $this->total = $result->getTotal();
         $this->offset = 0;
-        $this->max = $result->getIssuesCount();
-        $this->issues = $result->getIssues();
+        $this->max = $result->getUsersCount();
+        $this->users = $result->getUsers();
         $this->startAt++;
     }
 
