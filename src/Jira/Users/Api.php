@@ -176,7 +176,7 @@ class Api
 		// Fetch fields when the method is called for the first time.
 		if ( $this->fields === null ) {
 			$fields = array();
-			$result = $this->api(self::REQUEST_GET, '/rest/api/2/field', array(), true);
+			$result = $this->api(self::REQUEST_GET, '/rest/api/2/users/field', array(), true);
 
 			/* set hash key as custom field id */
 			foreach ( $result as $field ) {
@@ -217,11 +217,11 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-	public function search($username, $start_at = 0, $max_results = 20, $fields = '*')
+	public function search($username, $start_at = 0, $max_results = 1000, $fields = '*')
 	{
         return $this->api(
             self::REQUEST_GET,
-            '/rest/api/2/users/search',
+            '/rest/api/latest/users/search',
             array(
                 'username' => $username,
                 'startAt' => $start_at,
