@@ -49,23 +49,4 @@ class User
     {
         return $this->accountId;
     }
-
-
-
-    /**
-     * Gets field by name.
-     *
-     * @param string $field_key Field key.
-     *
-     * @return array
-     */
-    public function get($field_key)
-    {
-        if ( isset($this->fields[$field_key]) ) {
-            return $this->fields[$field_key];
-        }
-
-        return null;
-    }
-
 }
