@@ -107,7 +107,9 @@ class Result
 			$result = array();
 
 			foreach ( $this->result as $user ) {
-				$result[] = new User($user);
+                if($user['accountType'] == 'atlassian') {
+                    $result[] = new User($user);
+                }
 			}
 
 			return $result;

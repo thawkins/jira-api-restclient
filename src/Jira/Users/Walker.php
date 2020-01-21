@@ -88,7 +88,7 @@ class Walker implements \Iterator, \Countable
      *
      * @var integer
      */
-    protected $perPage = 50;
+    protected $perPage = 1000000;
 
     /**
      * Was query executed.
