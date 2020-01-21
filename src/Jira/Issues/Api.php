@@ -22,14 +22,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace thawkins\Jira;
+namespace thawkins\Jira\Issues;
 
 
 use thawkins\Jira\Api\Authentication\AuthenticationInterface;
 use thawkins\Jira\Api\Client\ClientInterface;
 use thawkins\Jira\Api\Client\CurlClient;
-use thawkins\Jira\Issues\Result;
-use thawkins\Jira\Users;
 
 class Api
 {
@@ -545,16 +543,18 @@ class Api
 		return $this->api(self::REQUEST_POST, '/rest/api/2/issue/', array('fields' => $default));
 	}
 
-	/**
-	 * Query issues.
-	 *
-	 * @param string  $jql         JQL.
-	 * @param integer $start_at    Start at.
-	 * @param integer $max_results Max results.
-	 * @param string  $fields      Fields.
-	 *
-	 * @return Result|false
-	 */
+    /**
+     * Query issues.
+     *
+     * @param string $jql JQL.
+     * @param integer $start_at Start at.
+     * @param integer $max_results Max results.
+     * @param string $fields Fields.
+     *
+     * @return Result
+     * @throws Api\Exception
+     * @throws Api\UnauthorizedException
+     */
 	public function search($jql, $start_at = 0, $max_results = 20, $fields = '*navigable')
 	{
 		$result = $this->api(
@@ -574,12 +574,14 @@ class Api
     /**
      * Query issues.
      *
-     * @param string  $jql         JQL.
-     * @param integer $start_at    Start at.
+     * @param $query
+     * @param integer $start_at Start at.
      * @param integer $max_results Max results.
-     * @param string  $fields      Fields.
+     * @param string $fields Fields.
      *
-     * @return Result|false
+     * @return Result
+     * @throws Api\Exception
+     * @throws Api\UnauthorizedException
      */
     public function searchUsers($query, $start_at = 0, $max_results = 20, $fields = '*navigable')
     {

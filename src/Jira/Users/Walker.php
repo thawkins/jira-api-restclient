@@ -25,7 +25,9 @@
 namespace thawkins\Jira\Users;
 
 
+use Exception;
 use thawkins\Jira\Api;
+use thawkins\Jira\User;
 
 class Walker implements \Iterator, \Countable
 {
@@ -194,14 +196,14 @@ class Walker implements \Iterator, \Countable
      *
      * @return boolean The return value will be casted to boolean and then evaluated.
      *                 Returns true on success or false on failure.
-     * @throws \Exception When "Walker::push" method wasn't called.
+     * @throws Exception When "Walker::push" method wasn't called.
      * @throws Api\UnauthorizedException When it happens.
      * @link   http://php.net/manual/en/iterator.valid.php
      */
     public function valid()
     {
         if ( is_null($this->query) ) {
-            throw new \Exception('you have to call Jira_Walker::push($query, $fields) at first');
+            throw new Exception('you have to call Jira_Walker::push($query, $fields) at first');
         }
 
         if ( !$this->executed ) {
@@ -220,7 +222,7 @@ class Walker implements \Iterator, \Countable
             catch ( Api\UnauthorizedException $e ) {
                 throw $e;
             }
-            catch ( \Exception $e ) {
+            catch ( Exception $e ) {
                 error_log($e->getMessage());
 
                 return false;
@@ -237,7 +239,7 @@ class Walker implements \Iterator, \Countable
                 catch ( Api\UnauthorizedException $e ) {
                     throw $e;
                 }
-                catch ( \Exception $e ) {
+                catch ( Exception $e ) {
                     error_log($e->getMessage());
 
                     return false;
@@ -292,7 +294,7 @@ class Walker implements \Iterator, \Countable
      * @param callable $callable Callable.
      *
      * @return void
-     * @throws \Exception When not a callable passed.
+     * @throws Exception When not a callable passed.
      */
     public function setDelegate($callable)
     {
@@ -300,18 +302,18 @@ class Walker implements \Iterator, \Countable
             $this->callback = $callable;
         }
         else {
-            throw new \Exception('passed argument is not callable');
+            throw new Exception('passed argument is not callable');
         }
     }
 
     /**
      * Sets result.
      *
-     * @param Api\Result $result Result.
+     * @param Users\Result $result Result.
      *
      * @return void
      */
-    protected function setResult(Api\Result $result)
+    protected function setResult(Users\Result $result)
     {
         $this->total = $result->getTotal();
         $this->offset = 0;
