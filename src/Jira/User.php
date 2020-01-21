@@ -36,6 +36,33 @@ class User
     {
        foreach($user as $key=>$value){
            $this->$key = $value;
+           if($key === 'displayName'){
+               if(stripos($value, '@redflaggroup.com') !==false){
+                   $this->email=$value;
+               } else {
+                   $res = array();
+                   $tok = strtok($value, " ,.\n\t");
+                   $val = trim(strtolower($tok));
+                   if(!empty($val)){
+                       $res[] = $val;
+                   }
+                   while ($tok !== false) {
+                       $tok = strtok(" .,\n\t");
+                       $val = trim(strtolower($tok));
+                       if(!empty($val)){
+                           $res[] = $val;
+                       }
+                   }
+                   $address = "unknown";
+                   if(count($res) >= 2){
+                       $address = ($res[0] . "." . array_pop($res));
+                   }
+                   $address .= '@redflaggroup.com';
+                   $this->email = $address;
+               }
+           }
+
+
        }
     }
 
