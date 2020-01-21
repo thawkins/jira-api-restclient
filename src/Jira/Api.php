@@ -570,7 +570,34 @@ class Api
 		return $result;
 	}
 
-	/**
+    /**
+     * Query issues.
+     *
+     * @param string  $jql         JQL.
+     * @param integer $start_at    Start at.
+     * @param integer $max_results Max results.
+     * @param string  $fields      Fields.
+     *
+     * @return Result|false
+     */
+    public function searchUsers($query, $start_at = 0, $max_results = 20, $fields = '*navigable')
+    {
+        $result = $this->api(
+            self::REQUEST_GET,
+            '/rest/api/2/user/search',
+            array(
+                'username' => $query,
+                'startAt' => $start_at,
+                'maxResults' => $max_results,
+                'fields' => $fields,
+            )
+        );
+
+        return $result;
+    }
+
+
+    /**
 	 * Creates new version.
 	 *
 	 * @param string $project_key Project key.
