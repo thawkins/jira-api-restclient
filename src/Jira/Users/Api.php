@@ -176,9 +176,6 @@ class Api
         );
     }
 
-mail address offered under #s 1 and 2 above can change based on user action. Individuals may choose to hide their email address at any time by changing their profile visibility settings. They may also choose to revoke consent previously given to an app to access to their personal account details via a 3LO flow. By contrast, apps using the Email API will have access to email address for all users across an instance as long as the app is actively installed. This access will not be affected by user opt-outs or changes in profile visibility settings.
-
-The Email API is a public API (it will be documented like an
     /**
      * Send request to specified host.
      *
