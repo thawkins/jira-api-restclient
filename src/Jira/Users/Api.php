@@ -129,7 +129,6 @@ class Api
 
         if ($url !== $this->endpoint) {
             $this->endpoint = $url;
-            $this->clearLocalCaches();
         }
     }
 
@@ -214,30 +213,5 @@ class Api
         }
     }
 
-
-    /**
-     * Automaps issue fields.
-     *
-     * @param array $user
-     * @return array
-     */
-    protected function automapFields(array $user)
-    {
-        if (isset($user['fields'])) {
-            $x = array();
-
-            foreach ($user['fields'] as $kk => $vv) {
-                if (isset($this->fields[$kk])) {
-                    $x[$this->fields[$kk]['name']] = $vv;
-                } else {
-                    $x[$kk] = $vv;
-                }
-            }
-
-            $user['fields'] = $x;
-        }
-
-        return $user;
-    }
 
 }
