@@ -72,22 +72,7 @@ class Result
 	 */
 	public function __construct(array $result)
 	{
-		if ( isset($result['expand']) ) {
-			$this->expand = explode(',', $result['expand']);
-		}
-
-		if ( isset($result['startAt']) ) {
-			$this->startAt = $result['startAt'];
-		}
-
-		if ( isset($result['maxResults']) ) {
-			$this->maxResults = $result['maxResults'];
-		}
-
-		if ( isset($result['total']) ) {
-			$this->total = $result['total'];
-		}
-
+		$this->total = count($result);
 		$this->result = $result;
 	}
 
@@ -118,10 +103,10 @@ class Result
 	 */
 	public function getUsers()
 	{
-		if ( isset($this->result['users']) ) {
+		if ( isset($this->result) ) {
 			$result = array();
 
-			foreach ( $this->result['users'] as $user ) {
+			foreach ( $this->result as $user ) {
 				$result[] = new User($user);
 			}
 

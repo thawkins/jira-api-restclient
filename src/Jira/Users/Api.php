@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 namespace thawkins\Jira\Users;
 
 
@@ -33,164 +34,108 @@ use thawkins\Jira\Api\UnauthorizedException;
 
 class Api
 {
-	const REQUEST_GET = 'GET';
-	const REQUEST_POST = 'POST';
-	const REQUEST_PUT = 'PUT';
-	const REQUEST_DELETE = 'DELETE';
+    const REQUEST_GET = 'GET';
+    const REQUEST_POST = 'POST';
+    const REQUEST_PUT = 'PUT';
+    const REQUEST_DELETE = 'DELETE';
 
-	const AUTOMAP_FIELDS = 0x01;
-
-	/**
-	 * Endpoint URL.
-	 *
-	 * @var string
-	 */
-	protected $endpoint;
-
-	/**
-	 * Client.
-	 *
-	 * @var ClientInterface
-	 */
-	protected $client;
-
-	/**
-	 * Authentication.
-	 *
-	 * @var AuthenticationInterface
-	 */
-	protected $authentication;
-
-	/**
-	 * Options.
-	 *
-	 * @var integer
-	 */
-	protected $options = self::AUTOMAP_FIELDS;
-
-	/**
-	 * Client-side cache of fields. List of fields when loaded, null when nothing is fetched yet.
-	 *
-	 * @var array|null
-	 */
-	protected $fields;
-
-	/**
-	 * Client-side cache of priorities. List of priorities when loaded, null when nothing is fetched yet.
-	 *
-	 * @var array|null
-	 */
-	protected $priorities;
-
-	/**
-	 * Client-side cache of statuses. List of statuses when loaded, null when nothing is fetched yet.
-	 *
-	 * @var array|null
-	 */
-	protected $statuses;
-
-
-	/**
-	 * Create a JIRA API client.
-	 *
-	 * @param string                  $endpoint       Endpoint URL.
-	 * @param AuthenticationInterface $authentication Authentication.
-	 * @param ClientInterface         $client         Client.
-	 */
-	public function __construct(
-		$endpoint,
-		AuthenticationInterface $authentication,
-		ClientInterface $client = null
-	) {
-		$this->setEndPoint($endpoint);
-		$this->authentication = $authentication;
-
-		if ( is_null($client) ) {
-			$client = new CurlClient();
-		}
-
-		$this->client = $client;
-	}
-
-	/**
-	 * Sets options.
-	 *
-	 * @param integer $options Options.
-	 *
-	 * @return void
-	 */
-	public function setOptions($options)
-	{
-		$this->options = $options;
-	}
-
-	/**
-	 * Get Endpoint URL.
-	 *
-	 * @return string
-	 */
-	public function getEndpoint()
-	{
-		return $this->endpoint;
-	}
-
-	/**
-	 * Set Endpoint URL.
-	 *
-	 * @param string $url Endpoint URL.
-	 *
-	 * @return void
-	 */
-	public function setEndpoint($url)
-	{
-		// Remove trailing slash in the url.
-		$url = rtrim($url, '/');
-
-		if ( $url !== $this->endpoint ) {
-			$this->endpoint = $url;
-			$this->clearLocalCaches();
-		}
-	}
-
-	/**
-	 * Helper method to clear the local caches. Is called when switching endpoints
-	 *
-	 * @return void
-	 */
-	protected function clearLocalCaches()
-	{
-		$this->fields = null;
-		$this->statuses = null;
-
-	}
+    const AUTOMAP_FIELDS = 0x01;
 
     /**
-     * Get fields definitions.
+     * Endpoint URL.
      *
-     * @return array
-     * @throws Exception
-     * @throws UnauthorizedException
+     * @var string
      */
-	public function getFields()
-	{
-		// Fetch fields when the method is called for the first time.
-		if ( $this->fields === null ) {
-			$fields = array();
-			$result = $this->api(self::REQUEST_GET, '/rest/api/2/users/field', array(), true);
-
-			/* set hash key as custom field id */
-			foreach ( $result as $field ) {
-				$fields[$field['id']] = $field;
-			}
-
-			$this->fields = $fields;
-		}
-
-		return $this->fields;
-	}
+    protected $endpoint;
 
     /**
-     * Get specified issue.
+     * Client.
+     *
+     * @var ClientInterface
+     */
+    protected $client;
+
+    /**
+     * Authentication.
+     *
+     * @var AuthenticationInterface
+     */
+    protected $authentication;
+
+    /**
+     * Options.
+     *
+     * @var integer
+     */
+    protected $options = 0;
+
+
+    /**
+     * Create a JIRA API client.
+     *
+     * @param string $endpoint Endpoint URL.
+     * @param AuthenticationInterface $authentication Authentication.
+     * @param ClientInterface $client Client.
+     */
+    public function __construct(
+        $endpoint,
+        AuthenticationInterface $authentication,
+        ClientInterface $client = null
+    )
+    {
+        $this->setEndPoint($endpoint);
+        $this->authentication = $authentication;
+
+        if (is_null($client)) {
+            $client = new CurlClient();
+        }
+
+        $this->client = $client;
+    }
+
+    /**
+     * Sets options.
+     *
+     * @param integer $options Options.
+     *
+     * @return void
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * Get Endpoint URL.
+     *
+     * @return string
+     */
+    public function getEndpoint()
+    {
+        return $this->endpoint;
+    }
+
+    /**
+     * Set Endpoint URL.
+     *
+     * @param string $url Endpoint URL.
+     *
+     * @return void
+     */
+    public function setEndpoint($url)
+    {
+        // Remove trailing slash in the url.
+        $url = rtrim($url, '/');
+
+        if ($url !== $this->endpoint) {
+            $this->endpoint = $url;
+            $this->clearLocalCaches();
+        }
+    }
+
+
+    /**
+     * Get specified userts.
      *
      * @param $user_key
      * @param string $expand Expand.
@@ -199,10 +144,10 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-	public function getUsers($user_key, $expand = '')
-	{
-		return $this->api(self::REQUEST_GET, sprintf('/rest/api/2/users/%s', $user_key), array('expand' => $expand));
-	}
+    public function getUsers($user_key, $expand = '')
+    {
+        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/users/%s', $user_key), array('expand' => $expand));
+    }
 
 
     /**
@@ -217,8 +162,8 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-	public function search($username, $start_at = 0, $max_results = 1000, $fields = '*')
-	{
+    public function search($username, $start_at = 0, $max_results = 1000, $fields = '*')
+    {
         return $this->api(
             self::REQUEST_GET,
             '/rest/api/latest/users/search',
@@ -226,12 +171,14 @@ class Api
                 'username' => $username,
                 'startAt' => $start_at,
                 'maxResults' => $max_results,
-                'fields' => $fields,
+                'expand'=>'groups,applicationRoles,name'
             )
         );
-	}
+    }
 
+mail address offered under #s 1 and 2 above can change based on user action. Individuals may choose to hide their email address at any time by changing their profile visibility settings. They may also choose to revoke consent previously given to an app to access to their personal account details via a 3LO flow. By contrast, apps using the Email API will have access to email address for all users across an instance as long as the app is actively installed. This access will not be affected by user opt-outs or changes in profile visibility settings.
 
+The Email API is a public API (it will be documented like an
     /**
      * Send request to specified host.
      *
@@ -246,50 +193,29 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-	public function api(
-		$method = self::REQUEST_GET,
-		$url = "",
-		$data = array(),
-		$return_as_array = false,
-		$is_file = false,
-		$debug = false
-	) {
-		$result = $this->client->sendRequest(
-			$method,
-			$url,
-			$data,
-			$this->getEndpoint(),
-			$this->authentication,
-			$is_file,
-			$debug
-		);
+    public function api(
+        $method = self::REQUEST_GET,
+        $url = "",
+        $data = array()
+    )
+    {
+        $result = $this->client->sendRequest(
+            $method,
+            $url,
+            $data,
+            $this->getEndpoint(),
+            $this->authentication,
+            false,
+            false
+        );
 
-		if ( strlen($result) ) {
-			$json = json_decode($result, true);
-
-			if ( $this->options & self::AUTOMAP_FIELDS ) {
-				if ( isset($json['issues']) ) {
-					if ( $this->fields === null ) {
-						$this->getFields();
-					}
-
-					foreach ( $json['issues'] as $offset => $issue ) {
-						$json['issues'][$offset] = $this->automapFields($issue);
-					}
-				}
-			}
-
-			if ( $return_as_array ) {
-				return $json;
-			}
-			else {
-				return new Result($json);
-			}
-		}
-		else {
-			return false;
-		}
-	}
+        if (strlen($result)) {
+            $json = json_decode($result, true);
+            return new Result($json);
+        } else {
+            return false;
+        }
+    }
 
 
     /**
@@ -300,14 +226,13 @@ class Api
      */
     protected function automapFields(array $user)
     {
-        if ( isset($user['fields']) ) {
+        if (isset($user['fields'])) {
             $x = array();
 
-            foreach ( $user['fields'] as $kk => $vv ) {
-                if ( isset($this->fields[$kk]) ) {
+            foreach ($user['fields'] as $kk => $vv) {
+                if (isset($this->fields[$kk])) {
                     $x[$this->fields[$kk]['name']] = $vv;
-                }
-                else {
+                } else {
                     $x[$kk] = $vv;
                 }
             }
