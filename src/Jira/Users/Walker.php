@@ -208,7 +208,7 @@ class Walker implements \Iterator, \Countable
 
         if ( !$this->executed ) {
             try {
-                $result = $this->api->searchUsers($this->getQuery(), $this->key(), $this->perPage, $this->fields);
+                $result = $this->api->search($this->getQuery(), $this->key(), $this->perPage, $this->fields);
 
                 $this->setResult($result);
                 $this->executed = true;
@@ -231,7 +231,7 @@ class Walker implements \Iterator, \Countable
         else {
             if ( $this->offset >= $this->max && $this->key() < $this->total ) {
                 try {
-                    $result = $this->api->searchUsers($this->getQuery(), $this->key(), $this->perPage, $this->fields);
+                    $result = $this->api->search($this->getQuery(), $this->key(), $this->perPage, $this->fields);
                     $this->setResult($result);
 
                     return true;
