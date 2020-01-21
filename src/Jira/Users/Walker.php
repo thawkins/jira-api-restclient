@@ -309,11 +309,11 @@ class Walker implements \Iterator, \Countable
     /**
      * Sets result.
      *
-     * @param Users\Result $result Result.
+     * @param Result $result Result.
      *
      * @return void
      */
-    protected function setResult(Users\Result $result)
+    protected function setResult(Result $result)
     {
         $this->total = $result->getTotal();
         $this->offset = 0;
