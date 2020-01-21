@@ -26,7 +26,7 @@ namespace thawkins\Jira\Users;
 
 
 use Exception;
-use thawkins\Jira\Api;
+use thawkins\Jira\Users\Api;
 use thawkins\Jira\User;
 
 class Walker implements \Iterator, \Countable
