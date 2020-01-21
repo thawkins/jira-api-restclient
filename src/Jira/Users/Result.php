@@ -107,8 +107,10 @@ class Result
 			$result = array();
 
 			foreach ( $this->result as $user ) {
-                if($user['accountType'] == 'atlassian') {
-                    $result[] = new User($user);
+			    if($user['active'] === true) {
+                    if ($user['accountType'] == 'atlassian') {
+                        $result[] = new User($user);
+                    }
                 }
 			}
 
