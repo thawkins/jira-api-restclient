@@ -170,7 +170,8 @@ class Api
                 'username' => $username,
                 'startAt' => $start_at,
                 'maxResults' => $max_results,
-                'expand'=>'groups,applicationRoles,name'
+                'expand'=>'groups,applicationRoles,name',
+                'accountType' => 'atlassian'
             )
         );
     }
