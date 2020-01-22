@@ -22,13 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace thawkins\Jira\Users;
+namespace thawkins\Jira\Groups;
 
 
 use Exception;
 use thawkins\Jira\Api\UnauthorizedException;
-use thawkins\Jira\Users\Api;
-use thawkins\Jira\Users\Entity;
+use thawkins\Jira\Groups\Api;
+use thawkins\Jira\Groups\Entity;
 
 
 class Walker implements \Iterator, \Countable
@@ -102,7 +102,7 @@ class Walker implements \Iterator, \Countable
      *
      * @var array
      */
-    protected $users = array();
+    protected $entities = array();
 
     /**
      * List of fields to query.
@@ -156,13 +156,13 @@ class Walker implements \Iterator, \Countable
     public function current()
     {
         if ( is_callable($this->callback) ) {
-            $tmp = $this->users[$this->offset];
+            $tmp = $this->entities[$this->offset];
             $callback = $this->callback;
 
             return $callback($tmp);
         }
         else {
-            return $this->users[$this->offset];
+            return $this->entities[$this->offset];
         }
     }
 
@@ -272,7 +272,7 @@ class Walker implements \Iterator, \Countable
         $this->max = 0;
         $this->total = null;
         $this->executed = false;
-        $this->users = array();
+        $this->entities = array();
     }
 
     /**
@@ -321,7 +321,7 @@ class Walker implements \Iterator, \Countable
         $this->total = $result->getTotal();
         $this->offset = 0;
         $this->max = $result->getCount();
-        $this->users = $result->getEntities();
+        $this->entities = $result->getEntities();
         $this->startAt++;
     }
 

@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 
-namespace thawkins\Jira\Users;
+namespace thawkins\Jira\Groups;
 
 
 use thawkins\Jira\Api\Authentication\AuthenticationInterface;
@@ -143,14 +143,14 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-    public function getEntities($entity_key, $expand = '')
+    public function getUsers($entity_key, $expand = '')
     {
-        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/users/%s', $entity_key), array('expand' => $expand));
+        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/groups/%s', $entity_key), array('expand' => $expand));
     }
 
 
     /**
-     * Query users.
+     * Query groups.
      *
      * @param $username
      * @param integer $start_at Start at.
@@ -161,17 +161,16 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-    public function search($username, $start_at = 0, $max_results = 1000, $fields = '*')
+    public function search($query, $start_at = 0, $max_results = 1000, $fields = '*')
     {
         return $this->api(
             self::REQUEST_GET,
-            '/rest/api/latest/users/search',
+            '/rest/api/latest/groups/picker',
             array(
-                'username' => $username,
+                'username' => $query,
                 'startAt' => $start_at,
                 'maxResults' => $max_results,
-                'expand'=>'groups,applicationRoles,name',
-                'accountType' => 'atlassian'
+                'expand'=>'groups,applicationRoles,name'
             )
         );
     }

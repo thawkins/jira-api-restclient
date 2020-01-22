@@ -22,110 +22,108 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace thawkins\Jira\Users;
+
+namespace thawkins\Jira\Groups;
 
 
-use thawkins\Jira\Users\Entity;
+use thawkins\Jira\Groups\Entity;
 
 class Result
 {
 
-	/**
-	 * Expand.
-	 *
-	 * @var array
-	 */
-	protected $expand;
+    /**
+     * Expand.
+     *
+     * @var array
+     */
+    protected $expand;
 
-	/**
-	 * Start at.
-	 *
-	 * @var integer
-	 */
-	protected $startAt;
+    /**
+     * Start at.
+     *
+     * @var integer
+     */
+    protected $startAt;
 
-	/**
-	 * Max results.
-	 *
-	 * @var integer
-	 */
-	protected $maxResults;
+    /**
+     * Max results.
+     *
+     * @var integer
+     */
+    protected $maxResults;
 
-	/**
-	 * Total
-	 *
-	 * @var integer
-	 */
-	protected $total;
+    /**
+     * Total
+     *
+     * @var integer
+     */
+    protected $total;
 
-	/**
-	 * Result.
-	 *
-	 * @var array
-	 */
-	protected $result;
+    /**
+     * Result.
+     *
+     * @var array
+     */
+    protected $result;
 
-	/**
-	 * Creates result instance.
-	 *
-	 * @param array $result Result.
-	 */
-	public function __construct(array $result)
+    /**
+     * Creates result instance.
+     *
+     * @param array $result Result.
+     */
+    public function __construct(array $result)
     {
         $this->total = count($result);
         $this->result = array();
         if ($result) {
             $_result = array();
-            $this->total=0;
+            $this->total = 0;
             foreach ($result as $user) {
-                if ($user['active'] === true) {
-                    if ($user['accountType'] == 'atlassian') {
-                        $_result[] = new Entity($user);
-                        $this->total++;                }
-                }
+                $_result[] = new Entity($user);
+                $this->total++;
             }
             $this->result = $_result;
         }
     }
 
-	/**
-	 * Returns total number of records.
-	 *
-	 * @return integer
-	 */
-	public function getTotal()
-	{
-		return $this->total;
-	}
+    /**
+     * Returns total number of records.
+     *
+     * @return integer
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
 
-	/**
-	 * Returns user count.
-	 *
-	 * @return integer
-	 */
-	public function getCount()
-	{
-		return $this->total;
-	}
+    /**
+     * Returns user count.
+     *
+     * @return integer
+     */
+    public function getCount()
+    {
+        return $this->total;
+    }
 
-	/**
-	 * Returns users.
-	 *
-	 * @return array
-	 */
-	public function getEntities()
-	{
-		return $this->result;;
-	}
+    /**
+     * Returns entities.
+     *
+     * @return array
+     */
+    public function getEntities()
+    {
+        return $this->result;
+    }
 
-	/**
-	 * Returns raw result.
-	 *
-	 * @return array
-	 */
-	public function getResult()
-	{
-		return $this->result;
-	}
+    /**
+     * Returns raw result.
+     *
+     * @return array
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
 
 }
