@@ -44,25 +44,50 @@ class User
                    $name = ucwords(strtr($name, ".", " "));
                    $this->$key = $name;
                } else {
-                   $res = array();
-                   $tok = strtok($value, " ,.\n\t");
-                   $val = trim(strtolower($tok));
-                   if(!empty($val)){
-                       $res[] = $val;
-                   }
-                   while ($tok !== false) {
-                       $tok = strtok(" .,\n\t");
+                   $pos = strpos($value, " ");
+                   if ($pos === true) {
+                       $res = array();
+                       $tok = strtok($value, " ,.\n\t");
                        $val = trim(strtolower($tok));
-                       if(!empty($val)){
+                       if (!empty($val)) {
                            $res[] = $val;
                        }
+                       while ($tok !== false) {
+                           $tok = strtok(" .,\n\t");
+                           $val = trim(strtolower($tok));
+                           if (!empty($val)) {
+                               $res[] = $val;
+                           }
+                       }
+                       $address = "unknown";
+                       if (count($res) >= 2) {
+                           $address = ($res[0] . "." . array_pop($res));
+                       }
+                       $address .= '@redflaggroup.com';
+                       $this->email = $address;
+
+                   } else {
+                       $res = array();
+                       $tok = strtok($value, " ,.\n\t");
+                       $val = trim(strtolower($tok));
+                       if (!empty($val)) {
+                           $res[] = $val;
+                       }
+                       while ($tok !== false) {
+                           $tok = strtok(" .,\n\t");
+                           $val = trim(strtolower($tok));
+                           if (!empty($val)) {
+                               $res[] = $val;
+                           }
+                       }
+                       $address = "unknown";
+                       if (count($res) >= 2) {
+                           $name = (ucfirst($res[0]) . " " . ucfirst(array_pop($res)));
+                           $this->$key = $name;
+                       }
+                       $address = (trim(strtolower($value)) . '@redflaggroup.com');
+                       $this->email = $address;
                    }
-                   $address = "unknown";
-                   if(count($res) >= 2){
-                       $address = ($res[0] . "." . array_pop($res));
-                   }
-                   $address .= '@redflaggroup.com';
-                   $this->email = $address;
                }
            }
 
