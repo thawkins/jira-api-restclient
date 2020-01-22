@@ -26,6 +26,10 @@
 namespace thawkins\Jira\Groups;
 
 
+use thawkins\Jira\Api\Exception;
+use thawkins\Jira\Api\UnauthorizedException;
+use thawkins\Jira\Groups\Api as GroupApi;
+
 class Entity
 {
     /**
@@ -50,4 +54,21 @@ class Entity
     {
         return $this->groupId;
     }
+
+    /**
+     * Gets jira's internal user id.
+     *
+     * @param GroupApi $api
+     * @return string
+     * @throws Exception
+     * @throws UnauthorizedException
+     */
+    public function getMembers(GroupApi $api)
+    {
+        $result = $api->getMembers($this->name);
+
+
+        return $this->groupId;
+    }
+
 }

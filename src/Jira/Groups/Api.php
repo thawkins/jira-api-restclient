@@ -136,14 +136,14 @@ class Api
     /**
      * Get specified userts.
      *
-     * @param $user_key
+     * @param $entity_key
      * @param string $expand Expand.
      *
      * @return false|Result /Result|false
      * @throws Exception
      * @throws UnauthorizedException
      */
-    public function getUsers($entity_key, $expand = '')
+    public function getEntities($entity_key, $expand = '')
     {
         return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/groups/%s', $entity_key), array('expand' => $expand));
     }
@@ -152,7 +152,7 @@ class Api
     /**
      * Query groups.
      *
-     * @param $username
+     * @param $query
      * @param integer $start_at Start at.
      * @param integer $max_results Max results.
      * @param string $fields Fields.
@@ -161,7 +161,7 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-    public function search($query, $start_at = 0, $max_results = 1000, $fields = '*')
+    public function search($query, $start_at = 0, $max_results = 1000)
     {
         return $this->api(
             self::REQUEST_GET,
@@ -176,15 +176,36 @@ class Api
     }
 
     /**
+     * Query groups.
+     *
+     * @param $query
+     * @param int $start_at
+     * @param int $max_results
+     * @return Result
+     * @throws Exception
+     * @throws UnauthorizedException
+     */
+    public function getMembers($query,$start_at = 0, $max_results = 1000)
+    {
+        return $this->api(
+            self::REQUEST_GET,
+            '/rest/api/latest/group/member',
+            array(
+                'groupname' => $query,
+                'startAt' => $start_at,
+                'maxResults' => $max_results,
+                'expand'=>'groups,applicationRoles,name'
+            )
+        );
+    }
+
+
+    /**
      * Send request to specified host.
      *
      * @param string $method Request method.
      * @param string $url URL.
      * @param array|string $data Data.
-     * @param boolean $return_as_array Return results as associative array.
-     * @param boolean $is_file Is file-related request.
-     * @param boolean $debug Debug this request.
-     *
      * @return Result|false
      * @throws Exception
      * @throws UnauthorizedException
