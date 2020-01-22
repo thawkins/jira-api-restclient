@@ -73,16 +73,19 @@ class Result
      */
     public function __construct(array $result)
     {
-        $this->total = count($result);
-        $this->result = array();
         if ($result) {
+        $this->total = count($result['groups']);
+        $this->result = array();
             $_result = array();
             $this->total = 0;
-            foreach ($result as $user) {
-                $_result[] = new Entity($user);
+            foreach ($result['groups'] as $group) {
+                $_result[] = new Entity($group);
                 $this->total++;
             }
             $this->result = $_result;
+        } else {
+            $this->total = 0;
+            $this->result = array();
         }
     }
 
