@@ -40,7 +40,7 @@ class User
                $pos = stripos($value, '@redflaggroup.com');
                if($pos !==false){
                    $this->email=$value;
-                   $name = substr(0,$pos,$value);
+                   $name = substr($value,0,$pos);
                    $name = ucwords(strtr($name, ".", " "));
                    $this->$key = $name;
                } else {
