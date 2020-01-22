@@ -22,10 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace thawkins\Jira;
+namespace thawkins\Jira\Users;
 
 
-class User
+class Entity
 {
     /**
      * Creates user instance.
@@ -43,6 +43,7 @@ class User
                    $name = substr($value,0,$pos);
                    $name = ucwords(strtr($name, ".", " "));
                    $this->$key = $name;
+                   $this->mode = "email";
                } else {
                    $pos = strpos($value, " ");
                    if ($pos === true) {
@@ -65,7 +66,7 @@ class User
                        }
                        $address .= '@redflaggroup.com';
                        $this->email = $address;
-
+                       $this->mode = "name+space";
                    } else {
                        $res = array();
                        $tok = strtok($value, " ,.\n\t");
@@ -87,6 +88,7 @@ class User
                        }
                        $address = (trim(strtolower($value)) . '@redflaggroup.com');
                        $this->email = $address;
+                       $this->mode = "name+dots";
                    }
                }
            }

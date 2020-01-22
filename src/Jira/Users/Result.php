@@ -25,7 +25,7 @@
 namespace thawkins\Jira\Users;
 
 
-use thawkins\Jira\User;
+use thawkins\Jira\Users\Entity;
 
 class Result
 {
@@ -80,7 +80,7 @@ class Result
             foreach ($result as $user) {
                 if ($user['active'] === true) {
                     if ($user['accountType'] == 'atlassian') {
-                        $_result[] = new User($user);
+                        $_result[] = new Entity($user);
                         $this->total++;                }
                 }
             }
