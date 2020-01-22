@@ -37,8 +37,12 @@ class User
        foreach($user as $key=>$value){
            $this->$key = $value;
            if($key === 'displayName'){
-               if(stripos($value, '@redflaggroup.com') !==false){
+               $pos = stripos($value, '@redflaggroup.com');
+               if($pos !==false){
                    $this->email=$value;
+                   $name = substr(0,$pos,$value);
+                   $name = ucwords(strtr($name, ".", " "));
+                   $this->$key = $name;
                } else {
                    $res = array();
                    $tok = strtok($value, " ,.\n\t");
