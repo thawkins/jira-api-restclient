@@ -155,8 +155,7 @@ class Api
      * @param $username
      * @param integer $start_at Start at.
      * @param integer $max_results Max results.
-     * @param string $fields Fields.
-     *
+     * @param null $accountType
      * @return Result
      * @throws Exception
      * @throws UnauthorizedException

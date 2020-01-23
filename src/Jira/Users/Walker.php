@@ -112,6 +112,13 @@ class Walker implements \Iterator, \Countable
     protected $fields = null;
 
     /**
+     * List of filter for query.
+     *
+     * @var string|array|null
+     */
+    protected $filter = null;
+
+    /**
      * Callback.
      *
      * @var callable
@@ -136,15 +143,17 @@ class Walker implements \Iterator, \Countable
     /**
      * Pushes query.
      *
-     * @param string            $query    JQL.
+     * @param string $query JQL.
      * @param string|array|null $fields Fields.
      *
+     * @param string $filter
      * @return void
      */
-    public function push($query, $fields = null)
+    public function push($query, $fields = null, $filter="")
     {
         $this->query = $query;
         $this->fields = $fields;
+        $this->filter = $filter;
     }
 
     /**
@@ -210,7 +219,7 @@ class Walker implements \Iterator, \Countable
 
         if ( !$this->executed ) {
             try {
-                $result = $this->api->search($this->getQuery(), $this->key(), $this->perPage, $this->fields);
+                $result = $this->api->search($this->getQuery(),  $this->perPage, $this->fields, $this->filter);
 
                 $this->setResult($result);
                 $this->executed = true;
@@ -233,7 +242,7 @@ class Walker implements \Iterator, \Countable
         else {
             if ( $this->offset >= $this->max && $this->key() < $this->total ) {
                 try {
-                    $result = $this->api->search($this->getQuery(), $this->key(), $this->perPage, $this->fields);
+                    $result = $this->api->search($this->getQuery(), $this->perPage, $this->fields, $this->filter);
                     $this->setResult($result);
 
                     return true;
