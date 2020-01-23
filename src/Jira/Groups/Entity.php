@@ -56,7 +56,7 @@ class Entity
     }
 
     /**
-     * Gets jira's internal user id.
+     * Gets jira's members for a given group name.
      *
      * @param GroupApi $api
      * @return string
@@ -66,8 +66,6 @@ class Entity
     public function getMembers(GroupApi $api)
     {
         $result = $api->getMembers($this->name);
-
-
         return $this->groupId;
     }
 
