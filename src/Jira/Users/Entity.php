@@ -61,8 +61,9 @@ class Entity
                            }
                        }
                        $address = "unknown";
+                       $lastName = trim(array_pop($res));
                        if (count($res) >= 2) {
-                           $address = ($res[0] . "." . array_pop($res));
+                           $address = (strtolower($res[0]) . "." . strtolower($lastName));
                        }
                        $address .= '@redflaggroup.com';
                        $this->email = $address;
@@ -82,11 +83,12 @@ class Entity
                            }
                        }
                        $address = "unknown";
+                       $lastName = trim(array_pop($res));
                        if (count($res) >= 2) {
-                           $name = (ucfirst($res[0]) . " " . ucfirst(array_pop($res)));
+                           $name = (ucfirst($res[0]) . " " . ucfirst($lastName));
                            $this->$key = $name;
                        }
-                       $address = (trim(strtolower(($res[0]) . "." . trim(array_pop($res)))) . '@redflaggroup.com');
+                       $address = (trim(strtolower(($res[0]) . "." . strtolower($lastName)) . '@redflaggroup.com');
                        $this->email = $address;
                        $this->mode = "name+dots";
                    }
