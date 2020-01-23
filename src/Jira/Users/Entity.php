@@ -86,7 +86,7 @@ class Entity
                            $name = (ucfirst($res[0]) . " " . ucfirst(array_pop($res)));
                            $this->$key = $name;
                        }
-                       $address = (trim(strtolower($value)) . '@redflaggroup.com');
+                       $address = (trim(strtolower(($res[0]) . "." . trim(array_pop($res)))) . '@redflaggroup.com');
                        $this->email = $address;
                        $this->mode = "name+dots";
                    }
