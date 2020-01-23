@@ -46,7 +46,7 @@ class Entity
                    $this->mode = "email";
                } else {
                    $pos = strpos($value, " ");
-                   if ($pos === true) {
+                   if ($pos !=false) {
                        $res = array();
                        $tok = strtok($value, " ,.\n\t");
                        $val = trim(strtolower($tok));
