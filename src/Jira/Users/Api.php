@@ -161,18 +161,22 @@ class Api
      * @throws Exception
      * @throws UnauthorizedException
      */
-    public function search($username, $start_at = 0, $max_results = 1000, $fields = '*')
+    public function search($username, $start_at = 0, $max_results = 1000, $accountType=NULL)
     {
+        $queryData =  array(
+            'username' => $username,
+            'startAt' => $start_at,
+            'maxResults' => $max_results,
+            'expand'=>'groups,applicationRoles,name'
+        );
+        if(!empty($accountType)){
+            $queryData['accountType'] =  $accountType;
+        }
+
         return $this->api(
             self::REQUEST_GET,
             '/rest/api/latest/users/search',
-            array(
-                'username' => $username,
-                'startAt' => $start_at,
-                'maxResults' => $max_results,
-                'expand'=>'groups,applicationRoles,name',
-                'accountType' => 'atlassian'
-            )
+            $queryData
         );
     }
 
