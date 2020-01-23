@@ -226,6 +226,9 @@ class Api
             false
         );
 
+        $_tmp = array();
+
+
         if (strlen($result)) {
             $json = json_decode($result, true);
             return new Result($json);
