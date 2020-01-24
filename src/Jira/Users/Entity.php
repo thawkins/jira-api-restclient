@@ -60,12 +60,12 @@ class Entity
                                $res[] = $val;
                            }
                        }
-                       $address = "unknown";
+                       $address = "unknown@example.com";
                        $lastName = trim(array_pop($res));
                        if (count($res) >= 1) {
                            $address = (strtolower($res[0]) . "." . strtolower($lastName));
+                           $address .= '@redflaggroup.com';
                        }
-                       $address .= '@redflaggroup.com';
                        $this->email = $address;
                        $this->mode = "name+space";
                    } else {
@@ -82,14 +82,15 @@ class Entity
                                $res[] = $val;
                            }
                        }
-                       $address = "unknown";
                        $lastName = trim(array_pop($res));
                        if (count($res) >= 1) {
                            $name = (ucfirst($res[0]) . " " . ucfirst($lastName));
                            $this->$key = $name;
+                           $address = (trim(strtolower($res[0]) . "." . strtolower($lastName)) . '@redflaggroup.com');
+                           $this->email = $address;
+                       } else {
+                           $this->email = 'unknown@example.com';
                        }
-                       $address = (trim(strtolower($res[0]) . "." . strtolower($lastName)) . '@redflaggroup.com');
-                       $this->email = $address;
                        $this->mode = "name+dots";
                    }
                }

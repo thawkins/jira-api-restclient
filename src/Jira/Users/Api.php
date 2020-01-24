@@ -150,7 +150,7 @@ class Api
 
     public function getEntity($accountId)
     {
-        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/user'), array('expand' => "groups,applicationRoles", 'accountId'=>$accountId));
+        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/user'), ['expand' => "groups,applicationRoles", 'accountId'=>$accountId]);
     }
 
 
