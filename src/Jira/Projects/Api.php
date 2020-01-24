@@ -233,6 +233,7 @@ class Api
      * @param string $method Request method.
      * @param string $url URL.
      * @param array|string $data Data.
+     * @param bool $raw
      * @return Result|false
      * @throws Exception
      * @throws UnauthorizedException
@@ -240,7 +241,8 @@ class Api
     public function api(
         $method = self::REQUEST_GET,
         $url = "",
-        $data = array()
+        $data = array(),
+        $raw = false
     )
     {
         $result = $this->client->sendRequest(
@@ -258,6 +260,9 @@ class Api
 
         if (strlen($result)) {
             $json = json_decode($result, true);
+            if($raw){
+                return $json;
+            }
             return new Result($json);
         } else {
             return false;

@@ -150,7 +150,7 @@ class Api
 
     public function getEntity($accountId)
     {
-        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/user'), ['expand' => "groups,applicationRoles", 'accountId'=>$accountId]);
+        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/user'), ['expand' => "groups,applicationRoles", 'accountId'=>$accountId], true);
     }
 
 
@@ -190,10 +190,7 @@ class Api
      * @param string $method Request method.
      * @param string $url URL.
      * @param array|string $data Data.
-     * @param boolean $return_as_array Return results as associative array.
-     * @param boolean $is_file Is file-related request.
-     * @param boolean $debug Debug this request.
-     *
+     * @param bool $raw
      * @return Result|false
      * @throws Exception
      * @throws UnauthorizedException
@@ -201,7 +198,8 @@ class Api
     public function api(
         $method = self::REQUEST_GET,
         $url = "",
-        $data = array()
+        $data = array(),
+        $raw = false
     )
     {
         $result = $this->client->sendRequest(
@@ -216,6 +214,9 @@ class Api
 
         if (strlen($result)) {
             $json = json_decode($result, true);
+            if($raw){
+                return $json;
+            }
             return new Result($json);
         } else {
             return false;
