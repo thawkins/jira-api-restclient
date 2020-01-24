@@ -62,7 +62,7 @@ class Entity
                        }
                        $address = "unknown";
                        $lastName = trim(array_pop($res));
-                       if (count($res) >= 2) {
+                       if (count($res) >= 1) {
                            $address = (strtolower($res[0]) . "." . strtolower($lastName));
                        }
                        $address .= '@redflaggroup.com';
@@ -84,7 +84,7 @@ class Entity
                        }
                        $address = "unknown";
                        $lastName = trim(array_pop($res));
-                       if (count($res) >= 2) {
+                       if (count($res) >= 1) {
                            $name = (ucfirst($res[0]) . " " . ucfirst($lastName));
                            $this->$key = $name;
                        }
