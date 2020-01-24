@@ -65,7 +65,7 @@ class Entity
      */
     public function getMembers(ProjectApi $api)
     {
-        return $this->projectId;
+        return $this->id;
     }
 
 }

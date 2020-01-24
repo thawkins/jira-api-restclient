@@ -75,12 +75,12 @@ class Result
     {
         if ($result) {
             $_result = array();
-            if(!empty($result['projects'])) {
-                $this->total = count($result['projects']);
+            if(!empty($result)) {
+                $this->total = count($result);
                 $this->result = array();
                 $_result = array();
                 $this->total = 0;
-                foreach ($result['projects'] as $project) {
+                foreach ($result as $project) {
                     $_result[] = new Entity($project);
                     $this->total++;
                 }
