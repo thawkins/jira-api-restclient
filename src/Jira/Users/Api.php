@@ -148,6 +148,11 @@ class Api
         return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/users/%s', $entity_key), array('expand' => $expand));
     }
 
+    public function getEntity($accountId)
+    {
+        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/user'), array('expand' => "groups,applicationRoles", 'accountId'=>$accountId));
+    }
+
 
     /**
      * Query users.
