@@ -175,6 +175,33 @@ class Api
         );
     }
 
+
+    /**
+     * Query groups.
+     *
+     * @param $query
+     * @param integer $start_at Start at.
+     * @param integer $max_results Max results.
+     * @param string $fields Fields.
+     *
+     * @return Result
+     * @throws Exception
+     * @throws UnauthorizedException
+     */
+    public function all($start_at = 0, $max_results = 1000)
+    {
+        return $this->api(
+            self::REQUEST_GET,
+            '/rest/api/latest/project',
+            array(
+                'startAt' => $start_at,
+                'maxResults' => $max_results,
+                'expand'=>'groups,applicationRoles,name'
+            )
+        );
+    }
+
+
     /**
      * Query groups.
      *
