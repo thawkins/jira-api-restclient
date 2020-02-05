@@ -52,21 +52,7 @@ class Entity
      */
     public function getId()
     {
-        return $this->groupId;
-    }
-
-    /**
-     * Gets jira's members for a given group name.
-     *
-     * @param GroupApi $api
-     * @return string
-     * @throws Exception
-     * @throws UnauthorizedException
-     */
-    public function getMembers(GroupApi $api)
-    {
-        $result = $api->getMembers($this->name);
-        return $this->groupId;
+        return $this->id;
     }
 
 }

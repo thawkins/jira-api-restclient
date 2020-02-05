@@ -75,13 +75,13 @@ class Result
     {
         if ($result) {
             $_result = array();
-            if(!empty($result['groups'])) {
-                $this->total = count($result['groups']);
+            if(!empty($result['comments'])) {
+                $this->total = count($result['comments']);
                 $this->result = array();
                 $_result = array();
                 $this->total = 0;
-                foreach ($result['groups'] as $group) {
-                    $_result[] = new Entity($group);
+                foreach ($result['comments'] as $comment) {
+                    $_result[] = new Entity($comment);
                     $this->total++;
                 }
             }
