@@ -145,7 +145,7 @@ class Api
      */
     public function getEntities($entity_key, $expand = '')
     {
-        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/comments/%s', $entity_key), array('expand' => $expand));
+        return $this->api(self::REQUEST_GET, sprintf('/rest/api/latest/issue/%s/comment', $entity_key), array('expand' => $expand));
     }
 
 
