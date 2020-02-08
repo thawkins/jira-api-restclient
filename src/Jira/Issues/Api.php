@@ -821,12 +821,13 @@ class Api
 			$x = array();
 
 			foreach ( $issue['fields'] as $kk => $vv ) {
-				if ( isset($this->fields[$kk]) ) {
-				    if(isset($x[$this->fields[$kk]['name']])){
-				        $a=1;
+                if ( isset($this->fields[$kk]) ) {
+                    if(isset($x[$this->fields[$kk]['name']])){
+                        $x[$this->fields[$kk]['name'] . "-" . $kk] = $vv;
+                    } else {
+                        $x[$this->fields[$kk]['name']] = $vv;
                     }
-					$x[$this->fields[$kk]['name']] = $vv;
-				}
+                }
 				else {
                     if(isset($x[$kk])){
                         $a=1;
