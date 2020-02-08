@@ -555,7 +555,7 @@ class Api
      * @throws Api\Exception
      * @throws Api\UnauthorizedException
      */
-	public function search($jql, $start_at = 0, $max_results = 20, $fields = '*navigable')
+	public function search($jql, $start_at = 0, $max_results = 20, $fields = '*navigable', $expand=[])
 	{
 		$result = $this->api(
 			self::REQUEST_GET,
@@ -565,6 +565,7 @@ class Api
 				'startAt' => $start_at,
 				'maxResults' => $max_results,
 				'fields' => $fields,
+                'expand' => $expand
 			)
 		);
 
