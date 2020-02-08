@@ -821,16 +821,16 @@ class Api
 			$x = array();
 
 			foreach ( $issue['fields'] as $kk => $vv ) {
-			    if($kk == 'Priority'){
-			        $a=1;
-                }
 				if ( isset($this->fields[$kk]) ) {
-				    if($this->fields[$kk]['name'] == 'Priority'){
+				    if(isset($x[$this->fields[$kk]['name']])){
 				        $a=1;
                     }
 					$x[$this->fields[$kk]['name']] = $vv;
 				}
 				else {
+                    if(isset($x[$kk])){
+                        $a=1;
+                    }
 					$x[$kk] = $vv;
 				}
 			}
