@@ -106,7 +106,7 @@ class Issue
             $this->renderedFields = [];
             foreach($issue['renderedFields'] as $key => $value){
                 if(!empty($value)){
-                    $this->renderedFields[$key] = [$value];
+                    $this->renderedFields[$key] = $value;
                 }
             }
             unset($issue['renderedFields']);
