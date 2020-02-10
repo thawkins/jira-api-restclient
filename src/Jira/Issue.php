@@ -103,7 +103,12 @@ class Issue
 		}
 
         if ( isset($issue['renderedFields']) ) {
-            $this->renderedFields = $issue['renderedFields'];
+            $this->renderedFields = [];
+            foreach($issue['renderedFields'] as $key => $value){
+                if(!empty($value)){
+                    $this->renderedFields[$key] = [$value];
+                }
+            }
             unset($issue['renderedFields']);
         }
 
@@ -227,6 +232,9 @@ class Issue
 	 */
 	public function getDescription()
 	{
+        if ( isset($this->renderedFields['description']) ) {
+            return $this->renderedFields['description'];
+        }
 		return $this->get('Description');
 	}
 
@@ -331,9 +339,7 @@ class Issue
 	 */
 	public function get($field_key)
 	{
-        if ( isset($this->renderedFields[$field_key]) ) {
-            return $this->renderedFields[$field_key];
-        }
+
 
 	    if ( isset($this->fields[$field_key]) ) {
 			return $this->fields[$field_key];
