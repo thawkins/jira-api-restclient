@@ -102,6 +102,11 @@ class Issue
 			unset($issue['fields']);
 		}
 
+        if ( isset($issue['renderedFields']) ) {
+            $this->renderedFields = $issue['renderedFields'];
+            unset($issue['renderedFields']);
+        }
+
 		$this->expandedInformation = $issue;
 	}
 
@@ -326,7 +331,11 @@ class Issue
 	 */
 	public function get($field_key)
 	{
-		if ( isset($this->fields[$field_key]) ) {
+        if ( isset($this->renderedFields[$field_key]) ) {
+            return $this->renderedFields[$field_key];
+        }
+
+	    if ( isset($this->fields[$field_key]) ) {
 			return $this->fields[$field_key];
 		}
 
