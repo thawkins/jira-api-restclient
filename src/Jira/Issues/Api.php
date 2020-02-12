@@ -241,7 +241,20 @@ class Api
 		return $this->api(self::REQUEST_GET, sprintf('/rest/api/2/attachment/%s', $attachment_id), array(), true);
 	}
 
-	/**
+    /**
+     * Gets attachment.
+     *
+     * @param string $issue_id Attachment ID.
+     *
+     * @return array|false
+     */
+    public function getAttachments($issue_id)
+    {
+        return $this->api(self::REQUEST_GET, sprintf('/rest/api/2/issue/%s/attachments', $issue_id), array(), true);
+    }
+
+
+    /**
 	 * Returns all projects.
 	 *
 	 * @return Result|false
