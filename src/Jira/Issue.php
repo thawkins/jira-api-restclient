@@ -185,6 +185,7 @@ class Issue
 		return $this->get('Reporter');
 	}
 
+
 	/**
 	 * Get issue created time.
 	 *

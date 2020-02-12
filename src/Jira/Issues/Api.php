@@ -799,13 +799,15 @@ class Api
 		}
 	}
 
-	/**
-	 * Downloads attachment.
-	 *
-	 * @param string $url URL.
-	 *
-	 * @return array|string
-	 */
+    /**
+     * Downloads attachment.
+     *
+     * @param string $url URL.
+     *
+     * @return array|string
+     * @throws \thawkins\Jira\Api\Exception
+     * @throws \thawkins\Jira\Api\UnauthorizedException
+     */
 	public function downloadAttachment($url)
 	{
 		$result = $this->client->sendRequest(
@@ -815,7 +817,7 @@ class Api
 			null,
 			$this->authentication,
 			true,
-			false
+			true
 		);
 
 		return $result;
