@@ -817,7 +817,7 @@ class Api
 			null,
 			$this->authentication,
 			true,
-			true
+			false
 		);
 
 		return $result;
