@@ -226,6 +226,23 @@ class Api
         );
     }
 
+    /**
+     * Query groups.
+     *
+     * @param $key
+     * @return Result
+     * @throws Exception
+     * @throws UnauthorizedException
+     */
+    public function getProject($key)
+    {
+        return $this->api(
+            self::REQUEST_GET,
+            '/rest/api/2/project/' . $key,
+            ['expand' => "description,lead,url,projectKeys"]
+        );
+    }
+
 
     /**
      * Send request to specified host.
