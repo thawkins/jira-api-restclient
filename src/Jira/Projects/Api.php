@@ -239,7 +239,8 @@ class Api
         return $this->api(
             self::REQUEST_GET,
             '/rest/api/2/project/' . $key,
-            ['expand' => "description,lead,url,projectKeys"]
+            ['expand' => "description,lead,url,projectKeys"],
+            true
         );
     }
 
