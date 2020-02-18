@@ -751,8 +751,8 @@ class Api
      * @param boolean $debug Debug this request.
      *
      * @return Result
-     * @throws Api\Exception
-     * @throws Api\UnauthorizedException
+     * @throws \thawkins\Jira\Api\Exception
+     * @throws \thawkins\Jira\Api\UnauthorizedException
      */
 	public function api(
 		$method = self::REQUEST_GET,
@@ -876,7 +876,26 @@ class Api
 		return $result;
 	}
 
-	/**
+    /**
+     * Get issue watchers.
+     *
+     * @param string $issue_key Issue key.
+     * @return Result|false
+     * @throws \thawkins\Jira\Api\Exception
+     * @throws \thawkins\Jira\Api\UnauthorizedException
+     */
+    public function getWatchers($issue_key)
+    {
+        return $this->api(
+            self::REQUEST_GET,
+            sprintf('/rest/api/2/issue/%s/watchers', $issue_key),
+            [],
+            true
+        );
+    }
+
+
+    /**
 	 * Closes issue.
 	 *
 	 * @param string $issue_key Issue key.
