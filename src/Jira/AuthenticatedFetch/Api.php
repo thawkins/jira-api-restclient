@@ -62,7 +62,7 @@ class Api
      *
      * @var integer
      */
-    protected $options = self::AUTOMAP_FIELDS;
+    protected $options = 0;
 
     /**
      * Client-side cache of fields. List of fields when loaded, null when nothing is fetched yet.
@@ -165,6 +165,12 @@ class Api
         $this->priorities = null;
         $this->statuses = null;
         $this->resolutions = null;
+    }
+
+
+    public function getHtml($url)
+    {
+        return $this->fetch(self::REQUEST_GET, $url, [], true);
     }
 
 
