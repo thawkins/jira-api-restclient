@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace thawkins\Jira\SDRequest;
+namespace thawkins\Jira\Confluence;
 
 
 use thawkins\Jira\Api\Authentication\AuthenticationInterface;
@@ -200,15 +200,12 @@ class Api
      *
      * @return Issues/Result|false
      */
-    public function getIssue($issue_key, $expand = '')
+    public function getContent($contentid, $expand = 'childTypes.all')
     {
-        return $this->api(self::REQUEST_GET, sprintf('/rest/servicedeskapi/request/%s', $issue_key), array('expand' => $expand));
+        return $this->api(self::REQUEST_GET, sprintf('/wiki/rest/api/content/%s', $contentid), array('expand' => $expand), true);
     }
 
-    public function getIssueKb($issue_key, $expand = '')
-    {
-        return $this->api(self::REQUEST_GET, sprintf('/rest/servicedesk/knowledgebase/latest/articles/%s', $issue_key), array('expand' => $expand), true);
-    }
+
 
 
     /**
