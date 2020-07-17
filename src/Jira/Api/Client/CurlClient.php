@@ -90,8 +90,8 @@ class CurlClient implements ClientInterface
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 300);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 300);
 
 		if ( !($credential instanceof Anonymous) ) {
 			curl_setopt($curl, CURLOPT_USERPWD, sprintf('%s:%s', $credential->getId(), $credential->getPassword()));
